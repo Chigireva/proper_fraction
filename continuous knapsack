@@ -1,0 +1,91 @@
+#include <iostream>
+
+using namespace std;
+
+void QS (float *arr1, int *arr2, int left, int right)
+{ 
+    int mid=arr1[(left+right)/2]; 
+    int i=left; 
+    int j=right; 
+    int temp;
+    while (i<=j) 
+    { 
+        while (arr1[i]>mid)
+        {
+            i++;
+        }
+        while (arr1[j]<mid) 
+        {
+            j--;
+        }
+        if (i<=j) 
+        { 
+            temp=arr1[i];
+            arr1[i]=arr1[j];
+            arr1[j]=temp;
+            temp=arr2[i];
+            arr2[i]=arr2[j];
+            arr2[j]=temp;
+            i++; 
+            j--; 
+        } 
+    } 
+    if (i<right) 
+    {
+        QS(arr1, arr2, i, right); 
+    }
+    if (left<j) 
+    {
+        QS(arr1, arr2, left, j); 
+    }
+}
+
+void Continuous_knapsack(int W, int n) 
+{
+    int ArrWeight[n]; 
+    int ArrCost[n]; 
+    int index[n]; 
+    float ArrCostPerUnit[n];
+    float ArrPart[n]; 
+    for (int i=0; i<n; i++) 
+    { 
+        cin>>ArrWeight[i]; 
+        cin>>ArrCost[i]; 
+        ArrCostPerUnit[i]=ArrCost[i]/ArrWeight[i]; 
+        index[i]=i;  
+        ArrPart[i]=0.0; 
+    }
+    float cost=0; 
+    int WeightOfLoad=0; 
+    QS (ArrCostPerUnit, index, 0, n-1); 
+    for (int i=0; i<n; i++)
+    {
+        if (WeightOfLoad<W) 
+        {
+            WeightOfLoad+=ArrWeight[index[i]];
+            cost+=ArrCost[index[i]];
+            ArrPart[index[i]]=1.0;
+        }
+        if (WeightOfLoad>W) 
+        {
+            int j=index[i];
+            ArrPart[j]=(W-WeightOfLoad+ArrWeight[j])/ArrWeight[j]; 
+            cost=cost-ArrCost[j]+ArrCost[j]*ArrPart[j];  
+            WeightOfLoad=W;
+        }
+    }
+    for (int i=0; i<n; i++) 
+    {
+        cout<<ArrPart[i]<<" ";
+    }
+    cout<<endl<<cost; 
+}
+
+int main ()
+{
+    int W, n;
+    cin>>W; 
+    cin>>n; 
+    Continuous_knapsack(W, n);
+    return 0;
+}
