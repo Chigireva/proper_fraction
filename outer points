@@ -1,0 +1,49 @@
+#include <iostream>
+
+using namespace std;
+
+void outer_points(unsigned short int n, unsigned short int m)
+{
+    int **ArrSegment = new int* [n];
+    for (unsigned short int i=0; i<n; i++)
+    {
+        ArrSegment[i]=new int [2];
+    }
+    int *ArrPoint = new int [m]; 
+    int count=0; 
+    for (unsigned short int i=0; i<n; i++)
+    {
+        cin>>ArrSegment[i][0];
+        cin>>ArrSegment[i][1];
+    }
+    for (unsigned short int i=0; i<m; i++) 
+    {
+    cin>>ArrPoint[i];    
+    }
+    for (unsigned short int i=0; i<m; i++) 
+    { 
+        for (unsigned short int j=0; j<n; j++)
+        {    
+            if (ArrPoint[i]>=ArrSegment[j][0] && ArrPoint[i]<=ArrSegment[j][1]) 
+                    count++; 
+                }
+        }
+        cout<<n-count<<" "; 
+        count=0; 
+    }
+    for (unsigned short int i=0; i<n; i++) 
+    {
+        delete[] ArrSegment[i];
+    }
+    delete[] ArrSegment;
+    delete[] ArrPoint;
+}
+    
+int main ()
+{
+    unsigned short int n, m; 
+    cin>>n; 
+    cin>>m; 
+    outer_points(n, m);
+    return 0;
+}
