@@ -1,0 +1,31 @@
+#include <iostream>
+
+using namespace std;
+
+void schedule (int n)
+{
+    int ArrStart[n]; 
+    int ArrFinish[n]; 
+    for (int i=0; i<n; i++) 
+    {
+        cin>>ArrStart[i];
+        cin>>ArrFinish[i];
+    }
+    int count=1; 
+    for (int i=n-1; i!=0; i--) 
+    {
+        if (ArrFinish[i-1]<=ArrStart[i]) 
+        {
+            count++; 
+        }
+    }
+    cout<<count; 
+}
+    
+int main ()
+{
+    int n; 
+    cin>>n;
+    schedule (n);
+    return 0;
+}
