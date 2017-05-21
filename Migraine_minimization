@@ -2,7 +2,7 @@
 #include <vector>
 #include <algorithm>
 using namespace std;
-int Math_is_awsome(int n){
+int Migraine_minimization(int n){
 vector <int> a(n + 1);
 a[0] = 0;
 for (int i = 1; i <= n; i++){
@@ -16,6 +16,6 @@ return 4 * a[n];
 int main(){
 int N;
 cin >> N;
-cout << Math_is_awsome(N);
+cout << Migraine_minimization(N);
 return 0;
 }
